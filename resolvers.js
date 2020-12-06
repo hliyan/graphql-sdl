@@ -7,11 +7,17 @@ const goodbye = () => {
 };
 
 const properties = () => {
-  return [{id: '1', address: 'foo'}];
+  return [{id: '1', address: '1 Broadway, NY'}];
 };
 
 module.exports = {
-  hello,
-  goodbye,
-  properties
+  Query: {
+    hello,
+    goodbye,
+    properties
+  },
+  Property: {
+    id(property) { return property.id },
+    address(property) { return property.address + ', USA' }
+  }
 };

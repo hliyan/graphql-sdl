@@ -11,3 +11,7 @@ type Property {
   id: ID!
   address: String!
 }
+
+schema {
+  query: Query
+}

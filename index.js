@@ -5,7 +5,6 @@ const express = require('express');
 const { graphqlHTTP } = require('express-graphql');
 const { configs, loadConfigs } = require('./configs');
 const { loadSchema } = require('./schema');
-const resolvers = require('./resolvers');
 
 // application starting point
 startServer({ 
@@ -17,18 +16,16 @@ startServer({
 async function startServer({dbUrl, dbName}) {
   loadConfigs();
 
-  let res = await loadSchema();
-  if (res.err) {
+  let {err, schema} = await loadSchema();
+  if (err) {
     console.log('Failed to load schema file');
-    console.log(res.err);
+    console.log(err);
     return;
   }
 
-  const {schema} = res;
   const app = express();
   app.use('/graphql', graphqlHTTP({
     schema, 
-    rootValue: resolvers, 
     graphiql: configs.graphiql
   }));
   app.listen(4000);
