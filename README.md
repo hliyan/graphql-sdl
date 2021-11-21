@@ -1,2 +1,3 @@
 # graphql-sdl
-Graphql example with SDL
+
+Graphql example with SDL.
